@@ -19,20 +19,9 @@ import KontaktForm from "../components/KontaktForm.vue";
   </section>
 
   <section class="mx-auto max-w-2xl px-5 pb-24">
-    <KontaktForm client:visible />
+    <!-- client:load: hydrera direkt så formuläret aldrig faller tillbaka på
+         en trasig native-submit. Netlify upptäcker formuläret via de
+         SSR-renderade attributen (data-netlify m.m.) i KontaktForm.vue. -->
+    <KontaktForm client:load />
   </section>
-
-  <!--
-    Dolt statiskt formulär enbart för Netlifys build-bot. Boten skannar statisk
-    HTML för att registrera formuläret och dess fält; den Vue-renderade varianten
-    ovan syns inte vid build. Fältnamnen måste matcha KontaktForm.vue exakt.
-  -->
-  <form name="kontakt" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="text" name="namn" />
-    <input type="email" name="epost" />
-    <input type="tel" name="telefon" />
-    <input type="text" name="foretag" />
-    <textarea name="meddelande"></textarea>
-    <input type="text" name="bot-field" />
-  </form>
 </BaseLayout>

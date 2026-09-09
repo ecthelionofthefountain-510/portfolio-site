@@ -64,10 +64,17 @@ const fieldClass =
   <form
     v-else
     name="kontakt"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    action="/tack/"
     class="grid gap-5"
     @submit.prevent="submit"
     novalidate
   >
+    <!-- Krävs för Netlify: identifierar formuläret vid native POST (utan JS) -->
+    <input type="hidden" name="form-name" value="kontakt" />
+
     <!-- Honeypot: dolt för människor, lockar bottar -->
     <p class="hidden" aria-hidden="true">
       <label>Lämna det här fältet tomt: <input name="bot-field" v-model="form['bot-field']" tabindex="-1" autocomplete="off" /></label>
