@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const paket = [
+  {
+    namn: "Start",
+    pris: "9 900 kr",
+    ledtid: "Klar på en vecka",
+    beskrivning: "En sida som svarar på det kunderna faktiskt googlar: var ligger ni, när har ni öppet, hur når man er.",
+    innehall: [
+      "Enkelsida, byggd för mobil först",
+      "Öppettider och karta",
+      "Kontaktformulär som mejlar dig direkt",
+      "Domän och publicering ingår",
+    ],
+  },
+  {
+    namn: "Standard",
+    pris: "18 900 kr",
+    ledtid: "Klar på två till tre veckor",
+    beskrivning: "För dig som har mer att visa än en adress — meny, tjänster, bilder och en text som säljer.",
+    innehall: [
+      "Fyra till sex sidor",
+      "Meny eller tjänsteöversikt",
+      "Bildgalleri",
+      "Sökmotoroptimering och Google Företagsprofil",
+      "Två rundor ändringar",
+    ],
+  },
+  {
+    namn: "Utökad",
+    pris: "från 34 900 kr",
+    ledtid: "Tidsplan sätts tillsammans",
+    beskrivning: "När sidan ska göra något, inte bara berätta något. Prissätts efter vad som ska byggas.",
+    innehall: [
+      "Bordsbokning eller tidbokning",
+      "Beställning och betalning online",
+      "Enklare redigeringsverktyg så du ändrar texter själv",
+      "Koppling till kassa- eller bokningssystem du redan har",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Tjänster och priser — Kevin, webbutveckling i Ystad"
+  description="Hemsidor för småföretag i Skåne. Fasta priser från 9 900 kr, drift och underhåll för 349 kr i månaden."
+>
+  <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
+    <h1 class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
+      Vad en hemsida kostar hos mig
+    </h1>
+    <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+      Fast pris innan vi börjar. Du får veta vad det landar på, vad som ingår
+      och när du har den i handen — inga timmar som tickar i bakgrunden.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5">
+    <ul class="border-t border-sand">
+      {paket.map((p) => (
+        <li class="border-b border-sand py-10 grid gap-6 md:grid-cols-[16rem_1fr]">
+          <div>
+            <h2 class="text-2xl font-bold">{p.namn}</h2>
+            <p class="font-display text-3xl text-raps-deep mt-2">{p.pris}</p>
+            <p class="text-sm text-ink-soft mt-1">{p.ledtid}</p>
+          </div>
+          <div>
+            <p class="text-lg leading-relaxed max-w-xl">{p.beskrivning}</p>
+            <ul class="mt-5 space-y-2 max-w-xl">
+              {p.innehall.map((rad) => (
+                <li class="flex gap-3 leading-relaxed">
+                  <span aria-hidden="true" class="text-raps-deep">·</span>
+                  <span>{rad}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5 mt-16">
+    <div class="bg-ink text-chalk p-8 sm:p-12">
+      <h2 class="text-2xl font-bold">Drift och underhåll</h2>
+      <p class="font-display text-4xl text-raps mt-3">349 kr/mån</p>
+      <p class="mt-5 max-w-xl leading-relaxed text-sand">
+        Hosting, domän, säkerhetsuppdateringar och löpande småändringar — nytt
+        öppettidsschema, ny bild, ny text. Du mejlar, jag fixar. Vill du sköta
+        sidan själv går det lika bra, då lämnar jag över allt.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5 mt-16 mb-8">
+    <h2 class="text-2xl font-bold">Osäker på vilket paket som passar?</h2>
+    <p class="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
+      Beskriv verksamheten i några meningar så återkommer jag med ett förslag
+      och ett pris. Kostar ingenting och binder dig inte till något.
+    </p>
+    <a href="/kontakt" class="inline-block mt-6 bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
+      Hör av dig
+    </a>
+  </section>
+</BaseLayout>

@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const nav = [
+  { href: "/tjanster", label: "Tjänster & priser" },
+  { href: "/arbeten", label: "Arbeten" },
+  { href: "/om-mig", label: "Om mig" },
+  { href: "/kontakt", label: "Kontakt" },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="sv_SE" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <a href="#innehall" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:bg-ink focus:text-chalk focus:px-4 focus:py-2">Hoppa till innehåll</a>
+
+    <header class="border-b border-sand">
+      <div class="mx-auto max-w-5xl px-5 py-5 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
+        <a href="/" class="font-display text-xl font-bold tracking-tight">
+          Kevin<span class="text-raps-deep">.</span>
+        </a>
+        <nav aria-label="Huvudmeny">
+          <ul class="flex flex-wrap gap-x-6 gap-y-1 font-display text-[0.95rem]">
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={path === item.href ? "page" : undefined}
+                   class={path === item.href
+                     ? "text-raps-deep underline underline-offset-4"
+                     : "text-ink-soft hover:text-raps-deep transition-colors"}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="innehall" class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-ink text-chalk mt-24">
+      <div class="mx-auto max-w-5xl px-5 py-12 flex flex-col gap-6 sm:flex-row sm:justify-between">
+        <div>
+          <p class="font-display text-lg">Kevin — webbutveckling i Ystad</p>
+          <p class="text-sm text-sand/80 mt-1">Hemsidor för småföretag i Skåne.</p>
+        </div>
+        <div class="text-sm">
+          <p><a href="mailto:hej@example.se" class="underline underline-offset-4">hej@example.se</a></p>
+          <p class="text-sand/70 mt-1">© {year}</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
