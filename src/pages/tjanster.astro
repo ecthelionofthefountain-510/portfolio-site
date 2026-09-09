@@ -46,11 +46,11 @@ const paket = [
   title="Tjänster och priser — Kevin, webbutveckling i Ystad"
   description="Hemsidor för småföretag i Skåne. Fasta priser från 9 900 kr, drift och underhåll för 349 kr i månaden."
 >
-  <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
+  <section class="mx-auto max-w-5xl px-5 pt-10 pb-12">
     <h1 class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
       Vad en hemsida kostar hos mig
     </h1>
-    <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Fast pris innan vi börjar. Du får veta vad det landar på, vad som ingår
       och när du har den i handen — inga timmar som tickar i bakgrunden.
     </p>
@@ -66,10 +66,10 @@ const paket = [
             <p class="text-sm text-ink-soft mt-1">{p.ledtid}</p>
           </div>
           <div>
-            <p class="text-lg leading-relaxed max-w-xl">{p.beskrivning}</p>
+            <p class="text-lg leading-[1.7] max-w-xl">{p.beskrivning}</p>
             <ul class="mt-5 space-y-2 max-w-xl">
               {p.innehall.map((rad) => (
-                <li class="flex gap-3 leading-relaxed">
+                <li class="flex gap-3 leading-[1.7]">
                   <span aria-hidden="true" class="text-raps-deep">·</span>
                   <span>{rad}</span>
                 </li>
@@ -85,7 +85,7 @@ const paket = [
     <div class="bg-ink text-chalk p-8 sm:p-12">
       <h2 class="text-2xl font-bold">Drift och underhåll</h2>
       <p class="font-display text-4xl text-raps mt-3">349 kr/mån</p>
-      <p class="mt-5 max-w-xl leading-relaxed text-sand">
+      <p class="mt-5 max-w-xl leading-[1.7] text-sand">
         Hosting, domän, säkerhetsuppdateringar och löpande småändringar — nytt
         öppettidsschema, ny bild, ny text. Du mejlar, jag fixar. Vill du sköta
         sidan själv går det lika bra, då lämnar jag över allt.
@@ -95,7 +95,7 @@ const paket = [
 
   <section class="mx-auto max-w-5xl px-5 mt-16 mb-8">
     <h2 class="text-2xl font-bold">Osäker på vilket paket som passar?</h2>
-    <p class="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
+    <p class="mt-4 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Beskriv verksamheten i några meningar så återkommer jag med ett förslag
       och ett pris. Kostar ingenting och binder dig inte till något.
     </p>

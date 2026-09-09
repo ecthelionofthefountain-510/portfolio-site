@@ -1,17 +1,116 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+const tjanster = [
+  {
+    namn: "Start",
+    pris: "9 900 kr",
+    text: "En sida som svarar på det kunderna googlar: var ni ligger, när ni har öppet, hur de når er.",
+  },
+  {
+    namn: "Standard",
+    pris: "18 900 kr",
+    text: "Flera sidor för dig som har mer att visa — meny, tjänster, bilder och text som säljer.",
+  },
+  {
+    namn: "Utökad",
+    pris: "från 34 900 kr",
+    text: "När sidan ska göra något: bordsbokning, beställning online, redigering du sköter själv.",
+  },
+];
+
+const steg = [
+  {
+    nr: "1",
+    rubrik: "Vi pratar ihop oss",
+    text: "Du berättar om verksamheten. Jag återkommer med ett förslag och ett fast pris — kostar ingenting.",
+  },
+  {
+    nr: "2",
+    rubrik: "Jag bygger",
+    text: "Du får se sidan växa fram och säger till om något ska ändras. Priset står fast hela vägen.",
+  },
+  {
+    nr: "3",
+    rubrik: "Sidan går live",
+    text: "Domän, publicering och Google Företagsprofil ingår. Sen sköter jag driften — eller du, om du hellre vill.",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Kevin — hemsidor för småföretag i Skåne"
+  description="Snabba, snygga hemsidor för småföretag i Ystad och Skåne. Fast pris från 9 900 kr, klart på en vecka. Drift och underhåll för 349 kr i månaden."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-5 pt-16 pb-14 sm:pt-24">
+    <p class="font-display text-sm uppercase tracking-[0.18em] text-raps-deep">
+      Webbutveckling i Ystad
+    </p>
+    <h1 class="mt-4 text-4xl sm:text-6xl font-bold max-w-3xl leading-[1.05]">
+      En hemsida som gör att kunderna hittar dig
+    </h1>
+    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
+      Många småföretag har bara en Facebook-sida. Jag bygger en riktig hemsida
+      som syns på Google, funkar i mobilen och gör att folk kan hitta, ringa och
+      boka dig — till ett fast pris du får veta i förväg.
+    </p>
+    <div class="mt-9 flex flex-wrap gap-4">
+      <a href="/kontakt" class="inline-block bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
+        Hör av dig
+      </a>
+      <a href="/tjanster" class="inline-block border border-ink font-display px-6 py-3 hover:bg-sand transition-colors">
+        Se priser
+      </a>
+    </div>
+  </section>
+
+  <!-- Tjänster i korthet -->
+  <section class="mx-auto max-w-5xl px-5 py-4">
+    <h2 class="text-2xl font-bold">Tre sätt att komma igång</h2>
+    <ul class="mt-8 border-t border-sand">
+      {tjanster.map((t) => (
+        <li class="border-b border-sand py-7 grid gap-4 md:grid-cols-[16rem_1fr] md:items-baseline">
+          <div>
+            <h3 class="text-xl font-bold">{t.namn}</h3>
+            <p class="font-display text-2xl text-raps-deep mt-1">{t.pris}</p>
+          </div>
+          <p class="text-lg leading-[1.7] max-w-xl text-ink-soft">{t.text}</p>
+        </li>
+      ))}
+    </ul>
+    <a href="/tjanster" class="inline-block mt-8 font-display text-raps-deep underline underline-offset-4 hover:text-ink transition-colors">
+      Se allt som ingår och drift för 349 kr/mån →
+    </a>
+  </section>
+
+  <!-- Så går det till -->
+  <section class="mx-auto max-w-5xl px-5 py-16 mt-8">
+    <h2 class="text-2xl font-bold">Så går det till</h2>
+    <div class="mt-8 grid gap-8 sm:grid-cols-3">
+      {steg.map((s) => (
+        <div>
+          <p class="font-display text-4xl text-raps-deep">{s.nr}</p>
+          <h3 class="mt-3 text-lg font-bold">{s.rubrik}</h3>
+          <p class="mt-2 leading-[1.7] text-ink-soft">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-5xl px-5">
+    <div class="bg-ink text-chalk p-8 sm:p-12">
+      <h2 class="text-2xl sm:text-3xl font-bold max-w-xl">
+        Berätta om din verksamhet så återkommer jag med ett förslag
+      </h2>
+      <p class="mt-4 max-w-xl leading-[1.7] text-sand">
+        Några meningar räcker. Du får ett pris och en tidsplan tillbaka — utan
+        att det binder dig till något.
+      </p>
+      <a href="/kontakt" class="inline-block mt-7 bg-raps text-ink font-display px-6 py-3 hover:bg-raps-deep transition-colors">
+        Hör av dig
+      </a>
+    </div>
+  </section>
+</BaseLayout>

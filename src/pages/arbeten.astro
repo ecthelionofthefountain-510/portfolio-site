@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// OBS: Inga riktiga kundcase finns ännu. Nedan är exempelsidor byggda för att
+// visa stil och funktion — märkta som "Exempel" så ingen tror att det är
+// riktiga kunder. Byt ut mot skarpa case så fort första jobbet är i hamn.
+const exempel = [
+  {
+    typ: "Restaurang",
+    namn: "Krogen vid torget",
+    beskrivning:
+      "En enkelsida för en lunchkrog: menyn högst upp, öppettider och karta ett svep bort, och en knapp för bordsbokning. Byggd för mobilen, för det är där gästerna kollar.",
+    visar: [
+      "Meny som är lätt att uppdatera",
+      "Öppettider och karta",
+      "Bordsbokning",
+      "Snabb laddning på mobil",
+    ],
+  },
+  {
+    typ: "Frisör",
+    namn: "Salong Sax",
+    beskrivning:
+      "En sida för en frisörsalong där tidsbokning är det viktigaste. Priser, bilder på jobb och en tydlig bokningsknapp på varje sida.",
+    visar: [
+      "Tidbokning",
+      "Prislista",
+      "Bildgalleri",
+      "Google Företagsprofil kopplad",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Arbeten — Kevin, webbutveckling i Ystad"
+  description="Exempel på hemsidor för småföretag i Skåne: restaurang och frisör. Ser du något du gillar bygger jag något liknande åt dig."
+>
+  <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
+    <h1 class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
+      Exempel på vad jag bygger
+    </h1>
+    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
+      Jag har precis börjat ta uppdrag vid sidan av jobbet, så här är sidor jag
+      byggt för att visa stilen och vad som är möjligt. Ser du något du gillar
+      gör jag något liknande, anpassat efter din verksamhet.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5">
+    <ul class="grid gap-8 sm:grid-cols-2">
+      {exempel.map((e) => (
+        <li class="border border-sand bg-white flex flex-col">
+          <div class="aspect-[16/10] bg-sand/60 flex items-center justify-center">
+            <span class="font-display text-ink-soft/70 text-sm uppercase tracking-[0.15em]">
+              {e.typ}
+            </span>
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="flex items-center gap-3">
+              <h2 class="text-xl font-bold">{e.namn}</h2>
+              <span class="font-display text-[0.7rem] uppercase tracking-[0.12em] bg-sand text-ink-soft px-2 py-0.5">
+                Exempel
+              </span>
+            </div>
+            <p class="mt-3 leading-[1.7] text-ink-soft">{e.beskrivning}</p>
+            <ul class="mt-4 space-y-1.5">
+              {e.visar.map((rad) => (
+                <li class="flex gap-2.5 text-sm">
+                  <span aria-hidden="true" class="text-raps-deep">·</span>
+                  <span>{rad}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5 mt-16 mb-8">
+    <div class="bg-ink text-chalk p-8 sm:p-12">
+      <h2 class="text-2xl sm:text-3xl font-bold max-w-xl">
+        Vill du se hur din sida kan se ut?
+      </h2>
+      <p class="mt-4 max-w-xl leading-[1.7] text-sand">
+        Berätta om din verksamhet så skissar jag på ett förslag. Första kunden
+        får dessutom halva priset mot att få vara med som referens här.
+      </p>
+      <a href="/kontakt" class="inline-block mt-7 bg-raps text-ink font-display px-6 py-3 hover:bg-raps-deep transition-colors">
+        Hör av dig
+      </a>
+    </div>
+  </section>
+</BaseLayout>

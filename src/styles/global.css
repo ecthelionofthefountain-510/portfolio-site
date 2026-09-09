@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Tailwinds automatiska fildetektering plockar inte upp .vue-komponenterna här,
+   så vi pekar ut src/ explicit. Utan detta genereras bara klasser som råkar
+   finnas även i .astro-filerna. */
+@source "../**/*.{astro,vue,js,ts}";
+
 @theme {
   --color-ink: #14283C;
   --color-ink-soft: #2E4459;

@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import portratt from "../assets/kevin.jpg";
+
+// PERSONALISERA: texten nedan är ett utkast i rätt röst, men fyll i med dina
+// egna, sanna detaljer där det står [...]. Håll dig till sådant som stämmer —
+// inga påhittade år av erfarenhet eller uppdrag. Notera även bisysslan: nämn
+// inte din statliga arbetsgivare här.
+const saJobbar = [
+  {
+    rubrik: "Fast pris, sagt i förväg",
+    text: "Du får veta vad sidan kostar innan vi börjar. Inga timmar som tickar, inga överraskningar på fakturan.",
+  },
+  {
+    rubrik: "Du pratar med den som bygger",
+    text: "Ingen säljare i mitten. Du mejlar mig, jag svarar och jag bygger. Det gör det enkelt att ändra saker på vägen.",
+  },
+  {
+    rubrik: "Byggd för att synas",
+    text: "Snabba sidor som Google gillar och som funkar lika bra i mobilen som på datorn. Det är där dina kunder är.",
+  },
+];
+---
+
+<BaseLayout
+  title="Om mig — Kevin, webbutveckling i Ystad"
+  description="Jag bygger hemsidor för småföretag i Skåne — enkelt, med fast pris och personlig kontakt hela vägen."
+>
+  <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
+    <div class="grid gap-10 md:grid-cols-[18rem_1fr] md:items-start">
+      <div class="max-w-[15rem] md:max-w-none">
+        <Image
+          src={portratt}
+          alt="Kevin Lundstedt, webbutvecklare i Ystad"
+          widths={[288, 576]}
+          sizes="(min-width: 768px) 18rem, 100vw"
+          class="w-full border border-sand"
+        />
+      </div>
+
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-bold leading-[1.1]">
+          Hej, jag heter Kevin
+        </h1>
+
+        <div class="mt-6 space-y-5 text-lg leading-[1.7]">
+      <p>
+        Jag bygger hemsidor för småföretag i Ystad och resten av Skåne, på
+        kvällar och helger vid sidan av mitt vanliga jobb. Det gör att jag kan
+        hålla priserna nere och ta mig tid med varje sida.
+      </p>
+      <p>
+        Många mindre verksamheter har idag bara en Facebook-sida eller ingen
+        närvaro alls. Jag tycker att en krog, en frisör eller en hantverkare
+        förtjänar en riktig hemsida — en som gör att folk hittar dig, förstår vad
+        du gör och enkelt kan höra av sig. Det behöver varken vara dyrt eller
+        krångligt.
+      </p>
+      <p>
+        <!-- PERSONALISERA: ett par meningar om dig — vad du gör till vardags,
+             hur du hamnade i webbutveckling, vad du gillar med det. -->
+        [Skriv ett par personliga meningar här om vem du är och varför du gör
+        det här.]
+      </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-8">
+    <h2 class="text-2xl font-bold">Så jobbar jag</h2>
+    <dl class="mt-6 border-t border-sand">
+      {saJobbar.map((punkt) => (
+        <div class="border-b border-sand py-6 grid gap-2 sm:grid-cols-[14rem_1fr]">
+          <dt class="font-display font-bold">{punkt.rubrik}</dt>
+          <dd class="leading-[1.7] text-ink-soft">{punkt.text}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 mt-8 mb-8">
+    <h2 class="text-2xl font-bold">Nyfiken?</h2>
+    <p class="mt-4 text-lg leading-[1.7] text-ink-soft">
+      Berätta om din verksamhet så återkommer jag med ett förslag och ett pris.
+      Det kostar ingenting och binder dig inte till något.
+    </p>
+    <a href="/kontakt" class="inline-block mt-6 bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
+      Hör av dig
+    </a>
+  </section>
+</BaseLayout>
