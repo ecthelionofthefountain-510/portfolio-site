@@ -24,6 +24,17 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Sätt temat innan sidan målas upp så att mörkt läge inte blinkar ljust. */}
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const dark = stored ? stored === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.dataset.theme = dark ? "dark" : "light";
+        } catch (e) {}
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={Astro.url.href} />
@@ -44,20 +55,33 @@ const year = new Date().getFullYear();
         <a href="/" class="font-display text-xl font-bold tracking-tight">
           Kevin<span class="text-raps-deep">.</span>
         </a>
-        <nav aria-label="Huvudmeny">
-          <ul class="flex flex-wrap gap-x-6 gap-y-1 font-display text-[0.95rem]">
-            {nav.map((item) => (
-              <li>
-                <a href={item.href} aria-current={path === item.href ? "page" : undefined}
-                   class={path === item.href
-                     ? "text-raps-deep underline underline-offset-4"
-                     : "text-ink-soft hover:text-raps-deep transition-colors"}>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div class="flex items-center gap-x-6 gap-y-1">
+          <nav aria-label="Huvudmeny">
+            <ul class="flex flex-wrap gap-x-6 gap-y-1 font-display text-[0.95rem]">
+              {nav.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={path === item.href ? "page" : undefined}
+                     class={path === item.href
+                       ? "text-raps-deep underline underline-offset-4"
+                       : "text-ink-soft hover:text-raps-deep transition-colors"}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <button id="tema-vaxel" type="button" aria-pressed="false"
+                  aria-label="Växla mörkt läge"
+                  class="text-ink-soft hover:text-raps-deep transition-colors -my-1 p-1">
+            <svg data-theme-icon="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+            <svg data-theme-icon="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" />
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -65,17 +89,37 @@ const year = new Date().getFullYear();
       <slot />
     </main>
 
-    <footer class="bg-ink text-chalk mt-24">
+    <footer class="site-footer mt-24">
       <div class="mx-auto max-w-5xl px-5 py-12 flex flex-col gap-6 sm:flex-row sm:justify-between">
         <div>
           <p class="font-display text-lg">Kevin — webbutveckling i Ystad</p>
-          <p class="text-sm text-sand/80 mt-1">Hemsidor för småföretag i Skåne.</p>
+          <p class="text-sm footer-muted mt-1">Hemsidor för småföretag i Skåne.</p>
         </div>
         <div class="text-sm">
           <p><a href="mailto:lundstedtkevin@gmail.com" class="underline underline-offset-4">lundstedtkevin@gmail.com</a></p>
-          <p class="text-sand/70 mt-1">© {year}</p>
+          <p class="footer-muted mt-1">© {year}</p>
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      (() => {
+        const btn = document.getElementById("tema-vaxel");
+        if (!btn) return;
+        const root = document.documentElement;
+        const sync = () => {
+          const dark = root.dataset.theme === "dark";
+          btn.setAttribute("aria-pressed", String(dark));
+          btn.setAttribute("aria-label", dark ? "Byt till ljust läge" : "Byt till mörkt läge");
+        };
+        sync();
+        btn.addEventListener("click", () => {
+          const dark = root.dataset.theme !== "dark";
+          root.dataset.theme = dark ? "dark" : "light";
+          try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
+          sync();
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -49,11 +49,11 @@ async function submit() {
 }
 
 const fieldClass =
-  "w-full border border-sand bg-white px-4 py-3 text-ink outline-none focus:border-ink transition-colors";
+  "w-full border border-sand bg-surface px-4 py-3 text-ink outline-none focus:border-ink transition-colors";
 </script>
 
 <template>
-  <div v-if="status === 'success'" class="border border-sand bg-white p-8">
+  <div v-if="status === 'success'" class="border border-sand bg-surface p-8">
     <h2 class="font-display text-2xl font-bold">Tack, jag har fått ditt meddelande!</h2>
     <p class="mt-3 leading-[1.7] text-ink-soft">
       Jag återkommer så snart jag kan, oftast inom ett dygn. Vill du lägga till

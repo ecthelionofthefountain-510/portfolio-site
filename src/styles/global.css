@@ -10,14 +10,58 @@
   --color-ink-soft: #2E4459;
   --color-chalk: #F7F5F0;
   --color-sand: #E5DED1;
+  --color-surface: #FFFFFF;
   --color-raps: #E8B733;
   --color-raps-deep: #C79515;
+  /* Text ovanpå den gula raps-ytan. Vänds INTE i mörkt läge — gul knapp
+     behöver mörk text i båda temana (ljus text på gult ger usel kontrast). */
+  --color-on-raps: #14283C;
 
   --font-display: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Source Serif 4", Georgia, serif;
 }
 
+/* Mörkt läge. Utility-klasserna (bg-chalk, text-ink, border-sand …) pekar på
+   dessa CSS-variabler, så att skriva om dem här räcker för att vända hela
+   sajten. html[data-theme] sätts av det inline-skript som körs före render i
+   BaseLayout, vilket undviker en ljus blink innan temat hunnit läsas in. */
+:root { color-scheme: light; }
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #ECEAE3;
+  --color-ink-soft: #A7B3C0;
+  --color-chalk: #0F1E2C;
+  --color-sand: #2C4157;
+  --color-surface: #16293B;
+  --color-raps: #E8B733;
+  --color-raps-deep: #F0C24A;
+}
+
 html { scroll-behavior: smooth; }
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Footern är ett fast mörkt band i BÅDA temana — den ska recedera, inte
+   inverteras till ljust i mörkt läge. Egna färger som inte följer token-flippen.
+   I mörkt läge något mörkare än sidan (#0F1E2C) så den tydligt sjunker undan. */
+.site-footer {
+  background-color: #14283C;
+  color: #F7F5F0;
+}
+html[data-theme="dark"] .site-footer {
+  background-color: #0C1826;
+}
+.site-footer .footer-muted {
+  color: rgb(247 245 240 / 0.72);
+}
+
+/* Temaväxlarens ikoner: visa månen i ljust läge, solen i mörkt. */
+[data-theme-icon="sun"] { display: none; }
+html[data-theme="dark"] [data-theme-icon="sun"] { display: block; }
+html[data-theme="dark"] [data-theme-icon="moon"] { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
