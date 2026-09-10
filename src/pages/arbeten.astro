@@ -8,6 +8,7 @@ const exempel = [
   {
     typ: "Restaurang",
     namn: "Krogen vid torget",
+    demo: "/demo/restaurang",
     beskrivning:
       "En enkelsida för en lunchkrog: menyn högst upp, öppettider och karta ett svep bort, och en knapp för bordsbokning. Byggd för mobilen, för det är där gästerna kollar.",
     visar: [
@@ -20,6 +21,7 @@ const exempel = [
   {
     typ: "Frisör",
     namn: "Salong Sax",
+    demo: "/demo/frisor",
     beskrivning:
       "En sida för en frisörsalong där tidsbokning är det viktigaste. Priser, bilder på jobb och en tydlig bokningsknapp på varje sida.",
     visar: [
@@ -43,7 +45,8 @@ const exempel = [
     <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Jag har precis börjat ta uppdrag vid sidan av jobbet, så här är sidor jag
       byggt för att visa stilen och vad som är möjligt. Ser du något du gillar
-      gör jag något liknande, anpassat efter din verksamhet.
+      gör jag något liknande, anpassat efter din verksamhet. Klicka dig in i
+      exemplen för att se hela sidorna.
     </p>
   </section>
 
@@ -51,11 +54,11 @@ const exempel = [
     <ul class="grid gap-8 sm:grid-cols-2">
       {exempel.map((e) => (
         <li class="border border-sand bg-surface flex flex-col">
-          <div class="aspect-[16/10] bg-sand/60 flex items-center justify-center">
-            <span class="font-display text-ink-soft/70 text-sm uppercase tracking-[0.15em]">
+          <a href={e.demo} class="group aspect-[16/10] bg-sand/60 flex items-center justify-center hover:bg-sand transition-colors">
+            <span class="font-display text-ink-soft/70 text-sm uppercase tracking-[0.15em] group-hover:text-ink transition-colors">
               {e.typ}
             </span>
-          </div>
+          </a>
           <div class="p-6 flex flex-col flex-1">
             <div class="flex items-center gap-3">
               <h2 class="text-xl font-bold">{e.namn}</h2>
@@ -72,6 +75,11 @@ const exempel = [
                 </li>
               ))}
             </ul>
+            <div class="mt-auto pt-5">
+              <a href={e.demo} class="inline-block font-display text-raps-deep underline underline-offset-4 hover:text-ink transition-colors">
+                Öppna demon →
+              </a>
+            </div>
           </div>
         </li>
       ))}
