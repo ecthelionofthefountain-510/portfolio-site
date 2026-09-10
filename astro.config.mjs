@@ -7,6 +7,9 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  // Krävs av sitemap-integrationen och används för canonical-taggar.
+  site: 'https://kevinlundstedt.se',
+
   vite: {
     plugins: [tailwindcss()]
   },
