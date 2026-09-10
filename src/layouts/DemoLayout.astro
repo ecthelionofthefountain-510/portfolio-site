@@ -1,0 +1,70 @@
+---
+// Lätt layout för demosidorna. Medvetet UTAN Kevins BaseLayout/global.css —
+// varje demo har sitt eget utseende. Ger bara <head>, noindex och en slim
+// demo-ribbon som märker sidan som exempel och länkar tillbaka till säljsidan.
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Demo: ska inte indexeras eller förväxlas med en riktig verksamhet -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <div class="demo-ribbon">
+      <span class="demo-ribbon__label">
+        <span aria-hidden="true">✦</span> Demosida byggd av Kevin — så här kan din sida se ut
+      </span>
+      <span class="demo-ribbon__actions">
+        <a href="/kontakt">Skaffa en liknande&nbsp;→</a>
+        <a href="/arbeten" class="demo-ribbon__back">Tillbaka</a>
+      </span>
+    </div>
+
+    <slot />
+
+    <style is:global>
+      .demo-ribbon {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem 1.5rem;
+        padding: 0.6rem 1.25rem;
+        background: #14283c;
+        color: #f7f5f0;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        font-size: 0.85rem;
+        line-height: 1.3;
+      }
+      .demo-ribbon__label { opacity: 0.9; }
+      .demo-ribbon__actions {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        white-space: nowrap;
+      }
+      .demo-ribbon a {
+        color: #f7f5f0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .demo-ribbon a:hover { text-decoration: underline; }
+      .demo-ribbon__back { opacity: 0.75; font-weight: 500; }
+    </style>
+  </body>
+</html>

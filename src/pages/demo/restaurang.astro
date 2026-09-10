@@ -1,0 +1,251 @@
+---
+import DemoLayout from "../../layouts/DemoLayout.astro";
+
+// Påhittad restaurang – ren demo. Kontaktuppgifterna är uppenbara platshållare.
+const meny = {
+  "Förrätter": [
+    ["Toast Skagen", "Handskalade räkor, dill, löjrom", "145"],
+    ["Rödbetssallad", "Getost, rostade valnötter, honung", "125"],
+    ["Dagens soppa", "Fråga din servitör", "95"],
+  ],
+  "Varmrätter": [
+    ["Fläsk med löksås", "Kokt potatis, inlagd gurka", "195"],
+    ["Halstrad torsk", "Brynt smör, ärtpuré, potatis", "245"],
+    ["Högrevsburgare", "Cheddar, picklad lök, pommes", "185"],
+    ["Rotfruktsgratäng", "Timjan, västerbottensost", "165"],
+  ],
+  "Efterrätter": [
+    ["Äppelkaka", "Vaniljsås", "95"],
+    ["Chokladtryffel", "Havssalt, flingsalt", "85"],
+  ],
+};
+
+const oppet = [
+  ["Mån–Tors", "11–22"],
+  ["Fredag", "11–24"],
+  ["Lördag", "12–24"],
+  ["Söndag", "12–20"],
+];
+---
+
+<DemoLayout
+  title="Krogen vid torget — restaurang i Ystad (demo)"
+  description="Skånsk husmanskost och dagens lunch mitt vid torget i Ystad. Boka bord online."
+>
+  <link
+    slot="head"
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+  />
+
+  <div class="site">
+    <header class="top">
+      <a href="#" class="brand">Krogen<span>vid torget</span></a>
+      <nav class="nav">
+        <a href="#meny">Meny</a>
+        <a href="#oppet">Öppettider</a>
+        <a href="#hitta">Hitta hit</a>
+        <a href="#boka" class="btn btn--sm">Boka bord</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero__text">
+        <p class="eyebrow">Vid Stora Torget · Ystad</p>
+        <h1>Husmanskost som<br />smakar hemma</h1>
+        <p class="lead">
+          En vardagskrog mitt i stan — dagens lunch, riktig middag och skånska
+          klassiker lagade från grunden. Välkommen in.
+        </p>
+        <div class="hero__cta">
+          <a href="#boka" class="btn">Boka bord</a>
+          <a href="#meny" class="btn btn--ghost">Se menyn</a>
+        </div>
+      </div>
+      <div class="hero__img" role="img" aria-label="Bild på restaurangens matsal">
+        <span>Här ligger ett foto på matsalen</span>
+      </div>
+    </section>
+
+    <section id="meny" class="meny">
+      <div class="section-head">
+        <h2>Menyn</h2>
+        <p>Byts efter säsong. Lunch serveras 11–14 på vardagar.</p>
+      </div>
+      {Object.entries(meny).map(([kategori, ratter]) => (
+        <div class="meny__group">
+          <h3>{kategori}</h3>
+          <ul>
+            {ratter.map(([namn, desc, pris]) => (
+              <li>
+                <div class="meny__row">
+                  <span class="meny__namn">{namn}</span>
+                  <span class="meny__dots"></span>
+                  <span class="meny__pris">{pris} kr</span>
+                </div>
+                <p class="meny__desc">{desc}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section class="info">
+      <div id="oppet" class="info__col">
+        <h2>Öppettider</h2>
+        <table class="oppet">
+          <tbody>
+            {oppet.map(([dag, tid]) => (
+              <tr><th scope="row">{dag}</th><td>{tid}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="info__note">Köket stänger en timme före stängning.</p>
+      </div>
+      <div id="hitta" class="info__col">
+        <h2>Hitta hit</h2>
+        <p class="info__addr">
+          Stora Torget 1<br />271 00 Ystad<br />
+          <a href="tel:+4641100000">0411-00 00 00</a>
+        </p>
+        <div class="map" role="img" aria-label="Karta över restaurangens läge">
+          <span>Karta med er plats</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="boka" class="boka">
+      <h2>Boka bord</h2>
+      <p>Ring, eller boka online — vi svarar snabbt.</p>
+      <div class="boka__cta">
+        <a href="tel:+4641100000" class="btn btn--light">Ring 0411-00 00 00</a>
+        <a href="#" class="btn btn--ghost-light">Boka online</a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div>
+        <p class="foot__brand">Krogen vid torget</p>
+        <p>Stora Torget 1, 271 00 Ystad · 0411-00 00 00</p>
+      </div>
+      <p class="foot__demo">Påhittad restaurang — exempelsida, ingen riktig verksamhet.</p>
+    </footer>
+  </div>
+
+  <style>
+    .site {
+      --bg: #f6f1e7;
+      --paper: #fbf8f1;
+      --ink: #23302a;
+      --green: #24463a;
+      --green-deep: #1a3329;
+      --terra: #bd6a4a;
+      --muted: #6b7269;
+      --line: #e2dccd;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    .site h1, .site h2, .site h3, .brand {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    /* Header */
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      max-width: 1080px; margin: 0 auto; padding: 1.5rem 1.5rem;
+    }
+    .brand { font-size: 1.5rem; color: var(--green); text-decoration: none; display: flex; align-items: baseline; gap: 0.4rem; }
+    .brand span { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terra); font-family: "Inter", sans-serif; }
+    .nav { display: flex; align-items: center; gap: 1.5rem; }
+    .nav > a { color: var(--ink); text-decoration: none; font-size: 0.95rem; }
+    .nav > a:hover { color: var(--terra); }
+
+    /* Buttons */
+    .btn {
+      display: inline-block; background: var(--green); color: #fff;
+      padding: 0.85rem 1.5rem; border-radius: 2px; text-decoration: none;
+      font-weight: 600; font-size: 0.95rem; transition: background 0.2s;
+    }
+    .btn:hover { background: var(--green-deep); }
+    .btn--sm { padding: 0.5rem 1rem; font-size: 0.9rem; }
+    .btn--ghost { background: transparent; color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+    .btn--ghost:hover { background: rgba(36,70,58,0.06); }
+    .btn--light { background: var(--terra); }
+    .btn--light:hover { background: #a85a3d; }
+    .btn--ghost-light { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5); }
+    .btn--ghost-light:hover { background: rgba(255,255,255,0.1); }
+
+    /* Hero */
+    .hero {
+      max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem;
+      display: grid; gap: 2.5rem; align-items: center;
+    }
+    @media (min-width: 800px) { .hero { grid-template-columns: 1fr 1fr; padding-top: 3rem; } }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; color: var(--terra); font-weight: 600; }
+    .hero h1 { font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.05; margin: 0.6rem 0 0; color: var(--green-deep); }
+    .lead { font-size: 1.15rem; color: var(--muted); max-width: 34ch; margin-top: 1.25rem; }
+    .hero__cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.75rem; }
+    .hero__img {
+      aspect-ratio: 4/5; border-radius: 3px;
+      background: linear-gradient(135deg, #2c5344, #24463a 55%, #1a3329);
+      display: flex; align-items: flex-end; padding: 1.25rem; color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+    }
+
+    /* Meny */
+    .meny { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .section-head { text-align: center; margin-bottom: 2.5rem; }
+    .section-head h2 { font-size: 2.5rem; color: var(--green-deep); }
+    .section-head p { color: var(--muted); margin-top: 0.5rem; }
+    .meny__group { margin-bottom: 2.5rem; }
+    .meny__group h3 { font-size: 1.5rem; color: var(--terra); border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+    .meny__group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
+    .meny__row { display: flex; align-items: baseline; gap: 0.5rem; }
+    .meny__namn { font-weight: 600; }
+    .meny__dots { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-3px); }
+    .meny__pris { color: var(--green); font-weight: 600; white-space: nowrap; }
+    .meny__desc { color: var(--muted); font-size: 0.92rem; margin: 0.15rem 0 0; }
+
+    /* Info */
+    .info {
+      background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .info { display: grid; gap: 2.5rem; max-width: 1080px; margin: 0 auto; padding: 3rem 1.5rem; }
+    @media (min-width: 720px) { .info { grid-template-columns: 1fr 1fr; } }
+    .info h2 { font-size: 1.9rem; color: var(--green-deep); margin-bottom: 1rem; }
+    .oppet { width: 100%; border-collapse: collapse; max-width: 320px; }
+    .oppet th, .oppet td { text-align: left; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-weight: 400; }
+    .oppet td { text-align: right; color: var(--green); font-weight: 600; }
+    .info__note, .info__addr { color: var(--muted); margin-top: 1rem; }
+    .info__addr a { color: var(--terra); }
+    .map {
+      margin-top: 1rem; aspect-ratio: 16/10; border-radius: 3px;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 22px, rgba(36,70,58,0.06) 22px 23px),
+        repeating-linear-gradient(90deg, transparent 0 22px, rgba(36,70,58,0.06) 22px 23px),
+        #eef0e8;
+      display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.85rem;
+    }
+
+    /* Boka */
+    .boka { background: var(--green-deep); color: #fff; text-align: center; padding: 4rem 1.5rem; }
+    .boka h2 { font-size: 2.5rem; }
+    .boka p { color: rgba(255,255,255,0.75); margin-top: 0.5rem; }
+    .boka__cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.75rem; }
+
+    /* Footer */
+    .foot {
+      max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem;
+      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .foot__brand { font-family: "Cormorant Garamond", serif; font-size: 1.2rem; color: var(--green); }
+    .foot__demo { font-style: italic; }
+  </style>
+</DemoLayout>

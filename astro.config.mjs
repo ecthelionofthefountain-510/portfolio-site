@@ -14,5 +14,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [vue(), sitemap()]
+  // Demosidorna är exempel (noindex) och ska inte ligga i sitemapen.
+  integrations: [vue(), sitemap({ filter: (page) => !page.includes('/demo/') })]
 });
