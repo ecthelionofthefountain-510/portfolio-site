@@ -58,6 +58,28 @@ html[data-theme="dark"] .site-footer {
   color: rgb(247 245 240 / 0.72);
 }
 
+/* Subtil hero-ambiens: svagt rutnät + mjuk rapsgul glöd, koncentrerat uppe till
+   höger där ytan annars är tom. Token-medvetet (rutnätet använder --color-ink
+   som vänds i mörkt läge) så det fungerar i båda temana. Maskat så det tonar
+   ut mjukt och aldrig stör läsbarheten. */
+.hero-ambient { position: relative; isolation: isolate; overflow: clip; }
+.hero-ambient::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 54px 54px;
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 76% 22%, #000, transparent 72%);
+  mask-image: radial-gradient(ellipse 65% 60% at 76% 22%, #000, transparent 72%);
+}
+.hero-ambient::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background: radial-gradient(closest-side at 80% 14%,
+    color-mix(in srgb, var(--color-raps) 20%, transparent), transparent 70%);
+}
+
 /* Temaväxlarens ikoner: visa månen i ljust läge, solen i mörkt. */
 [data-theme-icon="sun"] { display: none; }
 html[data-theme="dark"] [data-theme-icon="sun"] { display: block; }
