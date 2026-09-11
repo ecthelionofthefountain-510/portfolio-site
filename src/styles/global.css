@@ -1,89 +1,144 @@
 @import "tailwindcss";
 
 /* Tailwinds automatiska fildetektering plockar inte upp .vue-komponenterna här,
-   så vi pekar ut src/ explicit. Utan detta genereras bara klasser som råkar
-   finnas även i .astro-filerna. */
+   så vi pekar ut src/ explicit. */
 @source "../**/*.{astro,vue,js,ts}";
 
+/* ── Artisan-tema (mörkt-först) ──────────────────────────────────────────────
+   Varm nästan-svart botten, krämvit text, antikguld accent. Utility-klasserna
+   (bg-chalk, text-ink, border-sand, text-raps …) pekar på dessa variabler, så
+   hela sajten antar den mörka looken härifrån. */
 @theme {
-  --color-ink: #14283C;
-  --color-ink-soft: #2E4459;
-  --color-chalk: #F7F5F0;
-  --color-sand: #E5DED1;
-  --color-surface: #FFFFFF;
-  --color-raps: #E8B733;
-  --color-raps-deep: #C79515;
-  /* Text ovanpå den gula raps-ytan. Vänds INTE i mörkt läge — gul knapp
-     behöver mörk text i båda temana (ljus text på gult ger usel kontrast). */
-  --color-on-raps: #14283C;
+  --color-ink: #F2EDE3;        /* text (krämvit) */
+  --color-ink-soft: #A89F90;   /* dämpad text */
+  --color-chalk: #0F0E0C;      /* sidbakgrund (varm nästan-svart) */
+  --color-sand: #2E2A22;       /* linjer/kanter */
+  --color-surface: #1A1712;    /* lyft yta (kort) */
+  --color-raps: #C9A24B;       /* antikguld */
+  --color-raps-deep: #DBB86A;  /* ljusare guld (hover/betoning) */
+  --color-on-raps: #17140E;    /* mörk text på guld */
 
-  --font-display: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Source Serif 4", Georgia, serif;
+  --font-display: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-script: "Great Vibes", "Libre Baskerville", cursive;
 }
 
-/* Mörkt läge. Utility-klasserna (bg-chalk, text-ink, border-sand …) pekar på
-   dessa CSS-variabler, så att skriva om dem här räcker för att vända hela
-   sajten. html[data-theme] sätts av det inline-skript som körs före render i
-   BaseLayout, vilket undviker en ljus blink innan temat hunnit läsas in. */
-:root { color-scheme: light; }
-
-html[data-theme="dark"] {
-  color-scheme: dark;
-  --color-ink: #ECEAE3;
-  --color-ink-soft: #A7B3C0;
-  --color-chalk: #0F1E2C;
-  --color-sand: #2C4157;
-  --color-surface: #16293B;
-  --color-raps: #E8B733;
-  --color-raps-deep: #F0C24A;
-}
+:root { color-scheme: dark; }
 
 html { scroll-behavior: smooth; }
 
 body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--color-chalk);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  /* Stjärnstoft: två lager svaga ljuspunkter, fästa vid vyn, mycket diskret. */
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(242, 237, 227, 0.20), transparent),
+    radial-gradient(1px 1px at 75% 15%, rgba(242, 237, 227, 0.15), transparent),
+    radial-gradient(1px 1px at 45% 60%, rgba(242, 237, 227, 0.12), transparent),
+    radial-gradient(1px 1px at 88% 72%, rgba(242, 237, 227, 0.16), transparent),
+    radial-gradient(1.5px 1.5px at 62% 42%, rgba(201, 162, 75, 0.18), transparent),
+    radial-gradient(1px 1px at 12% 82%, rgba(242, 237, 227, 0.12), transparent),
+    radial-gradient(1px 1px at 33% 12%, rgba(242, 237, 227, 0.10), transparent);
+  background-attachment: fixed;
 }
 
-/* Footern är ett fast mörkt band i BÅDA temana — den ska recedera, inte
-   inverteras till ljust i mörkt läge. Egna färger som inte följer token-flippen.
-   I mörkt läge något mörkare än sidan (#0F1E2C) så den tydligt sjunker undan. */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+  line-height: 1.15;
+}
+
+/* Skriv-logga (ornamenterad wordmark) */
+.brand-script {
+  font-family: var(--font-script);
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+/* ── Header: translucent, sticky, mörkt material (Apple §12) ─────────────── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--color-chalk) 80%, transparent);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.site-header.scrolled {
+  background: color-mix(in srgb, var(--color-chalk) 92%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--color-raps) 22%, transparent);
+  box-shadow: 0 8px 30px -18px rgba(0, 0, 0, 0.8);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-header { background: var(--color-chalk); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  .site-header {
+    background: var(--color-chalk); backdrop-filter: none; -webkit-backdrop-filter: none;
+    border-bottom-color: var(--color-raps);
+  }
+}
+
+/* ── Footer: fast mörkt band, en aning djupare än sidan ──────────────────── */
 .site-footer {
-  background-color: #14283C;
-  color: #F7F5F0;
+  background-color: #0A0908;
+  color: var(--color-ink);
+  border-top: 1px solid var(--color-sand);
 }
-html[data-theme="dark"] .site-footer {
-  background-color: #0C1826;
-}
-.site-footer .footer-muted {
-  color: rgb(247 245 240 / 0.72);
-}
+.site-footer .footer-muted { color: var(--color-ink-soft); }
 
-/* Subtil hero-ambiens: svagt rutnät + mjuk rapsgul glöd, koncentrerat uppe till
-   höger där ytan annars är tom. Token-medvetet (rutnätet använder --color-ink
-   som vänds i mörkt läge) så det fungerar i båda temana. Maskat så det tonar
-   ut mjukt och aldrig stör läsbarheten. */
+/* ── Hero-ambiens: guldglöd + hårfint rutnät, uppe till höger ────────────── */
 .hero-ambient { position: relative; isolation: isolate; overflow: clip; }
 .hero-ambient::before {
   content: "";
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px);
-  background-size: 54px 54px;
-  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 76% 22%, #000, transparent 72%);
-  mask-image: radial-gradient(ellipse 65% 60% at 76% 22%, #000, transparent 72%);
+    linear-gradient(to right, rgba(242, 237, 227, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(242, 237, 227, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 78% 26%, #000, transparent 72%);
+  mask-image: radial-gradient(ellipse 65% 60% at 78% 26%, #000, transparent 72%);
 }
 .hero-ambient::after {
   content: "";
   position: absolute; inset: 0; z-index: -2; pointer-events: none;
-  background: radial-gradient(closest-side at 80% 14%,
-    color-mix(in srgb, var(--color-raps) 20%, transparent), transparent 70%);
+  background: radial-gradient(closest-side at 80% 18%,
+    color-mix(in srgb, var(--color-raps) 26%, transparent), transparent 70%);
 }
 
-/* Temaväxlarens ikoner: visa månen i ljust läge, solen i mörkt. */
-[data-theme-icon="sun"] { display: none; }
-html[data-theme="dark"] [data-theme-icon="sun"] { display: block; }
-html[data-theme="dark"] [data-theme-icon="moon"] { display: none; }
+/* ── Guld-hårlinje (dekorativ avdelare) ──────────────────────────────────── */
+.gold-rule {
+  width: 4rem; height: 2px; border: 0;
+  background: linear-gradient(to right, var(--color-raps), transparent);
+}
+
+/* ── Press-feedback (Apple §1) ───────────────────────────────────────────── */
+a[class~="px-6"][class~="py-3"],
+button {
+  transition: transform 0.12s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+a[class~="px-6"][class~="py-3"]:active,
+button:not(:disabled):active { transform: scale(0.97); }
+
+/* ── Scroll-reveal (Framer-lik, reduced-motion-säker, JS-gated) ──────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0s);
+    will-change: opacity, transform;
+  }
+  html.js [data-reveal].revealed { opacity: 1; transform: none; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -91,100 +146,11 @@ html[data-theme="dark"] [data-theme-icon="moon"] { display: none; }
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-body {
-  background-color: var(--color-chalk);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  /* Låt snitten optiskt anpassa formen efter storlek (Source Serif 4 har opsz-axel). */
-  font-optical-sizing: auto;
-}
-
-h1, h2, h3, .font-display {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
-  font-optical-sizing: auto;
-}
-
-/* Press-feedback: knapp-lika CTA:er (px-6 py-3), formulärets skicka-knapp och
-   temaväxlaren reagerar direkt vid nedtryck, inte vid release (Apple §1 Response).
-   Attributväljaren matchar Tailwinds enskilda klasser via ~=. */
-a[class~="px-6"][class~="py-3"],
-button {
-  transition: transform 0.12s ease, background-color 0.2s ease, color 0.2s ease;
-}
-a[class~="px-6"][class~="py-3"]:active,
-button:not(:disabled):active {
-  transform: scale(0.97);
-}
-@media (prefers-reduced-motion: reduce) {
   a[class~="px-6"][class~="py-3"]:active,
   button:not(:disabled):active { transform: none; }
 }
 
-/* Translucent, sticky header — ett flytande materiallager som innehållet glider
-   under (Apple §12). Bakgrunden är sidans egen ton (--color-chalk) gjord genom-
-   skinlig, så den följer temat automatiskt. Hård 1px-linje ersatt av en mjuk
-   scroll-edge som tonar in först när man scrollat. */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  /* Tjockt material: hög opacitet + kraftig blur så stor, ljus text bakom inte
-     läcker igenom och stör (Apple §12: större ytor ska läsa som tjockare). */
-  background: color-mix(in srgb, var(--color-chalk) 86%, transparent);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-.site-header.scrolled {
-  /* Ännu tjockare när innehåll faktiskt glider under. */
-  background: color-mix(in srgb, var(--color-chalk) 93%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--color-ink) 8%, transparent);
-  box-shadow: 0 6px 24px -16px color-mix(in srgb, var(--color-ink) 55%, transparent);
-}
-/* Tillgänglighet (Apple §14): gör materialet solitt när användaren bett om
-   mindre genomskinlighet eller högre kontrast. */
-@media (prefers-reduced-transparency: reduce) {
-  .site-header {
-    background: var(--color-chalk);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
-@media (prefers-contrast: more) {
-  .site-header {
-    background: var(--color-chalk);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom-color: var(--color-ink);
-  }
-}
-
-/* Scroll-reveal: element tonar in och glider upp mjukt när de når vyn
-   (Framer-liknande känsla, utan bibliotek). Endast om användaren inte bett om
-   mindre rörelse, och endast när JS är på (html.js) så innehåll aldrig blir
-   osynligt utan JS. Sätts synligt av IntersectionObserver i BaseLayout. */
-@media (prefers-reduced-motion: no-preference) {
-  html.js [data-reveal] {
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: var(--reveal-delay, 0s);
-    will-change: opacity, transform;
-  }
-  html.js [data-reveal].revealed {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 :focus-visible {
-  outline: 3px solid var(--color-raps-deep);
+  outline: 2px solid var(--color-raps);
   outline-offset: 3px;
 }
