@@ -77,6 +77,19 @@ h1, h2, h3, .font-display {
   }
 }
 
+/* Header-loggan döljs medan hero-loggan syns (startsidan), tonar in på scroll.
+   Klassen 'hide-brand' sätts av JS bara när JS + IO finns → utan JS syns den
+   alltid (inget innehåll fastnar dolt). */
+.header-brand { transition: opacity 0.4s ease, transform 0.4s ease; }
+.site-header.hide-brand .header-brand {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header.hide-brand .header-brand { transform: none; }
+}
+
 /* ── Footer: fast mörkt band, en aning djupare än sidan ──────────────────── */
 .site-footer {
   background-color: #0A0908;
