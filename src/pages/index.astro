@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import logo from "../assets/logo-lundstedt.png";
 
 const tjanster = [
   {
@@ -46,19 +48,27 @@ const steg = [
   <div class="hero-ambient">
     <section class="mx-auto max-w-6xl px-5 pt-20 pb-24 lg:pt-28 lg:pb-28 grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:items-center">
       <div>
-        <p data-reveal class="text-raps uppercase tracking-[0.25em] text-xs font-semibold">
+        <Image
+          data-reveal
+          src={logo}
+          alt="Kevin Lundstedt"
+          width={640}
+          height={295}
+          class="h-24 sm:h-28 lg:h-32 w-auto -ml-1"
+        />
+        <p data-reveal style="--reveal-delay: 0.1s" class="mt-6 text-raps uppercase tracking-[0.25em] text-xs font-semibold">
           Webbutveckling i Ystad
         </p>
-        <h1 data-reveal style="--reveal-delay: 0.08s" class="mt-6 text-5xl sm:text-6xl lg:text-7xl leading-[1.08]">
+        <h1 data-reveal style="--reveal-delay: 0.18s" class="mt-5 text-5xl sm:text-6xl lg:text-7xl leading-[1.08]">
           Handgjorda hemsidor med personlighet.
         </h1>
-        <hr data-reveal style="--reveal-delay: 0.16s" class="gold-rule mt-8" />
-        <p data-reveal style="--reveal-delay: 0.22s" class="mt-8 max-w-md text-lg leading-[1.75] text-ink-soft">
+        <hr data-reveal style="--reveal-delay: 0.26s" class="gold-rule mt-8" />
+        <p data-reveal style="--reveal-delay: 0.32s" class="mt-8 max-w-md text-lg leading-[1.75] text-ink-soft">
           Många småföretag har bara en Facebook-sida. Jag bygger riktiga hemsidor
           som syns på Google, funkar i mobilen och gör att folk kan hitta, ringa
           och boka dig — till ett fast pris du får veta i förväg.
         </p>
-        <div data-reveal style="--reveal-delay: 0.3s" class="mt-10 flex flex-wrap gap-4">
+        <div data-reveal style="--reveal-delay: 0.4s" class="mt-10 flex flex-wrap gap-4">
           <a href="/kontakt" class="inline-block bg-raps text-on-raps font-display px-6 py-3 hover:bg-raps-deep transition-colors">
             Hör av dig
           </a>
