@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import { Image } from "astro:assets";
+import logo from "../assets/logo-lundstedt.png";
 
 interface Props {
   title: string;
@@ -48,8 +50,14 @@ const year = new Date().getFullYear();
 
     <header class="site-header">
       <div class="mx-auto max-w-6xl px-5 py-4 flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-        <a href="/" class="brand-script text-[2.1rem] leading-none text-ink hover:text-raps transition-colors">
-          Kevin
+        <a href="/" class="inline-flex items-center" aria-label="Kevin Lundstedt — till startsidan">
+          <Image
+            src={logo}
+            alt="Kevin Lundstedt"
+            width={434}
+            height={200}
+            class="h-12 sm:h-14 w-auto"
+          />
         </a>
         <nav aria-label="Huvudmeny">
           <ul class="flex flex-wrap items-center gap-x-7 gap-y-1 text-[0.95rem]">
