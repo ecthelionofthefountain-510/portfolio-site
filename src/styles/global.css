@@ -20,7 +20,6 @@
 
   --font-display: "Libre Baskerville", Georgia, "Times New Roman", serif;
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-script: "Great Vibes", "Libre Baskerville", cursive;
 }
 
 :root { color-scheme: dark; }
@@ -50,13 +49,6 @@ h1, h2, h3, .font-display {
   letter-spacing: -0.01em;
   font-optical-sizing: auto;
   line-height: 1.15;
-}
-
-/* Skriv-logga (ornamenterad wordmark) */
-.brand-script {
-  font-family: var(--font-script);
-  letter-spacing: 0.01em;
-  font-weight: 400;
 }
 
 /* ── Header: translucent, sticky, mörkt material (Apple §12) ─────────────── */
