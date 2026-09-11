@@ -39,10 +39,10 @@ const exempel = [
   description="Exempel på hemsidor för småföretag i Skåne: restaurang och frisör. Ser du något du gillar bygger jag något liknande åt dig."
 >
   <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
-    <h1 class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
+    <h1 data-reveal class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
       Exempel på vad jag bygger
     </h1>
-    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
+    <p data-reveal style="--reveal-delay: 0.08s" class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Jag har precis börjat ta uppdrag vid sidan av jobbet, så här är sidor jag
       byggt för att visa stilen och vad som är möjligt. Ser du något du gillar
       gör jag något liknande, anpassat efter din verksamhet. Klicka dig in i
@@ -53,7 +53,7 @@ const exempel = [
   <section class="mx-auto max-w-5xl px-5">
     <ul class="grid gap-8 sm:grid-cols-2">
       {exempel.map((e) => (
-        <li class="border border-sand bg-surface flex flex-col">
+        <li data-reveal class="border border-sand bg-surface flex flex-col">
           <a href={e.demo} class="group aspect-[16/10] bg-sand/60 flex items-center justify-center hover:bg-sand transition-colors">
             <span class="font-display text-ink-soft/70 text-sm uppercase tracking-[0.15em] group-hover:text-ink transition-colors">
               {e.typ}
@@ -87,7 +87,7 @@ const exempel = [
   </section>
 
   <section class="mx-auto max-w-5xl px-5 mt-16 mb-8">
-    <div class="bg-ink text-chalk p-8 sm:p-12">
+    <div data-reveal class="bg-ink text-chalk p-8 sm:p-12">
       <h2 class="text-2xl sm:text-3xl font-bold max-w-xl">
         Vill du se hur din sida kan se ut?
       </h2>

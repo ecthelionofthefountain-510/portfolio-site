@@ -8,10 +8,10 @@ import KontaktForm from "../components/KontaktForm.vue";
   description="Berätta om din verksamhet så återkommer jag med ett förslag och ett fast pris. Kostar ingenting och binder dig inte till något."
 >
   <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
-    <h1 class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
+    <h1 data-reveal class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
       Berätta om din verksamhet
     </h1>
-    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
+    <p data-reveal style="--reveal-delay: 0.08s" class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Några meningar räcker — vad du gör, vad du har idag och vad du vill ha.
       Jag återkommer med ett förslag och ett fast pris. Det kostar ingenting och
       binder dig inte till något.
@@ -22,6 +22,8 @@ import KontaktForm from "../components/KontaktForm.vue";
     <!-- client:load: hydrera direkt så formuläret aldrig faller tillbaka på
          en trasig native-submit. Netlify upptäcker formuläret via de
          SSR-renderade attributen (data-netlify m.m.) i KontaktForm.vue. -->
-    <KontaktForm client:load />
+    <div data-reveal style="--reveal-delay: 0.16s">
+      <KontaktForm client:load />
+    </div>
   </section>
 </BaseLayout>

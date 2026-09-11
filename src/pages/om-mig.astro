@@ -29,7 +29,7 @@ const saJobbar = [
 >
   <section class="mx-auto max-w-5xl px-5 pt-16 pb-12">
     <div class="grid gap-10 md:grid-cols-[18rem_1fr] md:items-start">
-      <div class="max-w-[15rem] md:max-w-none">
+      <div data-reveal class="max-w-[15rem] md:max-w-none">
         <Image
           src={portratt}
           alt="Kevin Lundstedt, webbutvecklare i Ystad"
@@ -39,7 +39,7 @@ const saJobbar = [
         />
       </div>
 
-      <div>
+      <div data-reveal style="--reveal-delay: 0.12s">
         <h1 class="text-4xl sm:text-5xl font-bold leading-[1.1]">
           Hej, jag heter Kevin
         </h1>
@@ -71,8 +71,8 @@ const saJobbar = [
   </section>
 
   <section class="mx-auto max-w-3xl px-5 py-8">
-    <h2 class="text-2xl font-bold">Så jobbar jag</h2>
-    <dl class="mt-6 border-t border-sand">
+    <h2 data-reveal class="text-2xl font-bold">Så jobbar jag</h2>
+    <dl data-reveal style="--reveal-delay: 0.08s" class="mt-6 border-t border-sand">
       {saJobbar.map((punkt) => (
         <div class="border-b border-sand py-6 grid gap-2 sm:grid-cols-[14rem_1fr]">
           <dt class="font-display font-bold">{punkt.rubrik}</dt>
@@ -83,12 +83,12 @@ const saJobbar = [
   </section>
 
   <section class="mx-auto max-w-3xl px-5 mt-8 mb-8">
-    <h2 class="text-2xl font-bold">Nyfiken?</h2>
-    <p class="mt-4 text-lg leading-[1.7] text-ink-soft">
+    <h2 data-reveal class="text-2xl font-bold">Nyfiken?</h2>
+    <p data-reveal style="--reveal-delay: 0.08s" class="mt-4 text-lg leading-[1.7] text-ink-soft">
       Berätta om din verksamhet så återkommer jag med ett förslag och ett pris.
       Det kostar ingenting och binder dig inte till något.
     </p>
-    <a href="/kontakt" class="inline-block mt-6 bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
+    <a href="/kontakt" data-reveal style="--reveal-delay: 0.16s" class="inline-block mt-6 bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
       Hör av dig
     </a>
   </section>

@@ -47,10 +47,10 @@ const paket = [
   description="Hemsidor för småföretag i Skåne. Fasta priser från 9 900 kr, drift och underhåll för 349 kr i månaden."
 >
   <section class="mx-auto max-w-5xl px-5 pt-10 pb-12">
-    <h1 class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
+    <h1 data-reveal class="text-4xl sm:text-5xl font-bold max-w-2xl leading-[1.1]">
       Vad en hemsida kostar hos mig
     </h1>
-    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
+    <p data-reveal style="--reveal-delay: 0.08s" class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Fast pris innan vi börjar. Du får veta vad det landar på, vad som ingår
       och när du har den i handen — inga timmar som tickar i bakgrunden.
     </p>
@@ -59,7 +59,7 @@ const paket = [
   <section class="mx-auto max-w-5xl px-5">
     <ul class="border-t border-sand">
       {paket.map((p) => (
-        <li class="border-b border-sand py-10 grid gap-6 md:grid-cols-[16rem_1fr]">
+        <li data-reveal class="border-b border-sand py-10 grid gap-6 md:grid-cols-[16rem_1fr]">
           <div>
             <h2 class="text-2xl font-bold">{p.namn}</h2>
             <p class="font-display text-3xl text-raps-deep mt-2">{p.pris}</p>
@@ -82,7 +82,7 @@ const paket = [
   </section>
 
   <section class="mx-auto max-w-5xl px-5 mt-16">
-    <div class="bg-ink text-chalk p-8 sm:p-12">
+    <div data-reveal class="bg-ink text-chalk p-8 sm:p-12">
       <h2 class="text-2xl font-bold">Drift och underhåll</h2>
       <p class="font-display text-4xl text-raps mt-3">349 kr/mån</p>
       <p class="mt-5 max-w-xl leading-[1.7] text-sand">
@@ -94,12 +94,12 @@ const paket = [
   </section>
 
   <section class="mx-auto max-w-5xl px-5 mt-16 mb-8">
-    <h2 class="text-2xl font-bold">Osäker på vilket paket som passar?</h2>
-    <p class="mt-4 max-w-xl text-lg leading-[1.7] text-ink-soft">
+    <h2 data-reveal class="text-2xl font-bold">Osäker på vilket paket som passar?</h2>
+    <p data-reveal style="--reveal-delay: 0.08s" class="mt-4 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Beskriv verksamheten i några meningar så återkommer jag med ett förslag
       och ett pris. Kostar ingenting och binder dig inte till något.
     </p>
-    <a href="/kontakt" class="inline-block mt-6 bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
+    <a href="/kontakt" data-reveal style="--reveal-delay: 0.16s" class="inline-block mt-6 bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
       Hör av dig
     </a>
   </section>
