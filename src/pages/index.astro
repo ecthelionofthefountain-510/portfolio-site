@@ -45,18 +45,18 @@ const steg = [
   <!-- Hero -->
   <div class="hero-ambient">
   <section class="mx-auto max-w-5xl px-5 pt-16 pb-14 sm:pt-24">
-    <p class="font-display text-sm uppercase tracking-[0.18em] text-raps-deep">
+    <p data-reveal class="font-display text-sm uppercase tracking-[0.18em] text-raps-deep">
       Webbutveckling i Ystad
     </p>
-    <h1 class="mt-4 text-4xl sm:text-6xl font-bold max-w-3xl leading-[1.05]">
+    <h1 data-reveal style="--reveal-delay: 0.08s" class="mt-4 text-4xl sm:text-6xl font-bold max-w-3xl leading-[1.05]">
       En hemsida som gör att kunderna hittar dig
     </h1>
-    <p class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
+    <p data-reveal style="--reveal-delay: 0.16s" class="mt-6 max-w-xl text-lg leading-[1.7] text-ink-soft">
       Många småföretag har bara en Facebook-sida. Jag bygger en riktig hemsida
       som syns på Google, funkar i mobilen och gör att folk kan hitta, ringa och
       boka dig — till ett fast pris du får veta i förväg.
     </p>
-    <div class="mt-9 flex flex-wrap gap-4">
+    <div data-reveal style="--reveal-delay: 0.24s" class="mt-9 flex flex-wrap gap-4">
       <a href="/kontakt" class="inline-block bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors">
         Hör av dig
       </a>
@@ -69,8 +69,8 @@ const steg = [
 
   <!-- Tjänster i korthet -->
   <section class="mx-auto max-w-5xl px-5 py-4">
-    <h2 class="text-2xl font-bold">Tre sätt att komma igång</h2>
-    <ul class="mt-8 border-t border-sand">
+    <h2 data-reveal class="text-2xl font-bold">Tre sätt att komma igång</h2>
+    <ul data-reveal style="--reveal-delay: 0.08s" class="mt-8 border-t border-sand">
       {tjanster.map((t) => (
         <li class="border-b border-sand py-7 grid gap-4 md:grid-cols-[16rem_1fr] md:items-baseline">
           <div>
@@ -88,8 +88,8 @@ const steg = [
 
   <!-- Så går det till -->
   <section class="mx-auto max-w-5xl px-5 py-16 mt-8">
-    <h2 class="text-2xl font-bold">Så går det till</h2>
-    <div class="mt-8 grid gap-8 sm:grid-cols-3">
+    <h2 data-reveal class="text-2xl font-bold">Så går det till</h2>
+    <div data-reveal style="--reveal-delay: 0.08s" class="mt-8 grid gap-8 sm:grid-cols-3">
       {steg.map((s) => (
         <div>
           <p class="font-display text-4xl text-raps-deep">{s.nr}</p>
@@ -102,7 +102,7 @@ const steg = [
 
   <!-- CTA -->
   <section class="mx-auto max-w-5xl px-5">
-    <div class="bg-ink text-chalk p-8 sm:p-12">
+    <div data-reveal class="bg-ink text-chalk p-8 sm:p-12">
       <h2 class="text-2xl sm:text-3xl font-bold max-w-xl">
         Berätta om din verksamhet så återkommer jag med ett förslag
       </h2>

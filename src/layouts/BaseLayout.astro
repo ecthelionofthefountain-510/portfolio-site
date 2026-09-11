@@ -30,6 +30,9 @@ const year = new Date().getFullYear();
     {/* Sätt temat innan sidan målas upp så att mörkt läge inte blinkar ljust. */}
     <script is:inline>
       (() => {
+        // Markera att JS är på — scroll-reveal döljer bara element när detta finns,
+        // så innehåll aldrig blir osynligt om JS saknas.
+        document.documentElement.classList.add("js");
         try {
           const stored = localStorage.getItem("theme");
           const dark = stored ? stored === "dark"
@@ -113,6 +116,32 @@ const year = new Date().getFullYear();
         const sync = () => header.classList.toggle("scrolled", window.scrollY > 4);
         sync();
         window.addEventListener("scroll", sync, { passive: true });
+      })();
+    </script>
+
+    <script is:inline>
+      // Scroll-reveal: tona in [data-reveal]-element när de når vyn.
+      (() => {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const els = document.querySelectorAll("[data-reveal]");
+        if (reduce || !("IntersectionObserver" in window) || !els.length) {
+          els.forEach((el) => el.classList.add("revealed"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add("revealed");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+        // Säkerhetsnät: inget innehåll får fastna osynligt om IO aldrig triggar.
+        setTimeout(() => els.forEach((el) => el.classList.add("revealed")), 2500);
       })();
     </script>
 

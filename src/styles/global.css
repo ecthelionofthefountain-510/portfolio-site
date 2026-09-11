@@ -132,13 +132,17 @@ button:not(:disabled):active {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--color-chalk) 72%, transparent);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  /* Tjockt material: hög opacitet + kraftig blur så stor, ljus text bakom inte
+     läcker igenom och stör (Apple §12: större ytor ska läsa som tjockare). */
+  background: color-mix(in srgb, var(--color-chalk) 86%, transparent);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 .site-header.scrolled {
+  /* Ännu tjockare när innehåll faktiskt glider under. */
+  background: color-mix(in srgb, var(--color-chalk) 93%, transparent);
   border-bottom-color: color-mix(in srgb, var(--color-ink) 8%, transparent);
   box-shadow: 0 6px 24px -16px color-mix(in srgb, var(--color-ink) 55%, transparent);
 }
@@ -157,6 +161,26 @@ button:not(:disabled):active {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom-color: var(--color-ink);
+  }
+}
+
+/* Scroll-reveal: element tonar in och glider upp mjukt när de når vyn
+   (Framer-liknande känsla, utan bibliotek). Endast om användaren inte bett om
+   mindre rörelse, och endast när JS är på (html.js) så innehåll aldrig blir
+   osynligt utan JS. Sätts synligt av IntersectionObserver i BaseLayout. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0s);
+    will-change: opacity, transform;
+  }
+  html.js [data-reveal].revealed {
+    opacity: 1;
+    transform: none;
   }
 }
 
