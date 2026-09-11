@@ -156,7 +156,7 @@ const fieldClass =
       <button
         type="submit"
         :disabled="status === 'sending'"
-        class="inline-block bg-ink text-chalk font-display px-6 py-3 hover:bg-ink-soft transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        class="inline-block bg-raps text-on-raps font-display px-6 py-3 hover:bg-raps-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {{ status === "sending" ? "Skickar…" : "Skicka" }}
       </button>
