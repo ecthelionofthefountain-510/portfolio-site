@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import { Image } from "astro:assets";
+import logo from "../assets/logo-lundstedt.png";
 
 interface Props {
   title: string;
@@ -27,19 +29,9 @@ const year = new Date().getFullYear();
     <!-- TILLFÄLLIGT: håller sidan borta från Google medan den färdigställs.
          Ta bort denna rad (och säg till mig) när sidan ska bli sökbar. -->
     <meta name="robots" content="noindex, nofollow" />
-    {/* Sätt temat innan sidan målas upp så att mörkt läge inte blinkar ljust. */}
     <script is:inline>
-      (() => {
-        // Markera att JS är på — scroll-reveal döljer bara element när detta finns,
-        // så innehåll aldrig blir osynligt om JS saknas.
-        document.documentElement.classList.add("js");
-        try {
-          const stored = localStorage.getItem("theme");
-          const dark = stored ? stored === "dark"
-            : window.matchMedia("(prefers-color-scheme: dark)").matches;
-          document.documentElement.dataset.theme = dark ? "dark" : "light";
-        } catch (e) {}
-      })();
+      // Markera att JS är på — scroll-reveal döljer bara element när detta finns.
+      document.documentElement.classList.add("js");
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -50,44 +42,37 @@ const year = new Date().getFullYear();
     <meta property="og:locale" content="sv_SE" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   </head>
 
   <body class="min-h-screen flex flex-col">
-    <a href="#innehall" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:bg-ink focus:text-chalk focus:px-4 focus:py-2">Hoppa till innehåll</a>
+    <a href="#innehall" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:bg-raps focus:text-on-raps focus:px-4 focus:py-2">Hoppa till innehåll</a>
 
     <header class="site-header">
-      <div class="mx-auto max-w-5xl px-5 py-5 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
-        <a href="/" class="font-display text-xl font-bold tracking-tight">
-          Kevin<span class="text-raps-deep">.</span>
+      <div class="mx-auto max-w-6xl px-5 py-4 flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+        <a href="/" class="header-brand inline-flex items-center" aria-label="Kevin Lundstedt — till startsidan">
+          <Image
+            src={logo}
+            alt="Kevin Lundstedt"
+            width={434}
+            height={200}
+            class="h-12 sm:h-14 w-auto"
+          />
         </a>
-        <div class="flex items-center gap-x-6 gap-y-1">
-          <nav aria-label="Huvudmeny">
-            <ul class="flex flex-wrap gap-x-6 gap-y-1 font-display text-[0.95rem]">
-              {nav.map((item) => (
-                <li>
-                  <a href={item.href} aria-current={path === item.href ? "page" : undefined}
-                     class={path === item.href
-                       ? "text-raps-deep underline underline-offset-4"
-                       : "text-ink-soft hover:text-raps-deep transition-colors"}>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <button id="tema-vaxel" type="button" aria-pressed="false"
-                  aria-label="Växla mörkt läge"
-                  class="text-ink-soft hover:text-raps-deep transition-colors -my-1 p-1">
-            <svg data-theme-icon="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-            </svg>
-            <svg data-theme-icon="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" />
-            </svg>
-          </button>
-        </div>
+        <nav aria-label="Huvudmeny">
+          <ul class="flex flex-wrap items-center gap-x-7 gap-y-1 text-[0.95rem]">
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={path === item.href ? "page" : undefined}
+                   class={path === item.href
+                     ? "text-raps"
+                     : "text-ink-soft hover:text-raps transition-colors"}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </header>
 
@@ -96,26 +81,42 @@ const year = new Date().getFullYear();
     </main>
 
     <footer class="site-footer mt-24">
-      <div class="mx-auto max-w-5xl px-5 py-12 flex flex-col gap-6 sm:flex-row sm:justify-between">
+      <div class="mx-auto max-w-6xl px-5 py-14 flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-end">
         <div>
-          <p class="font-display text-lg">Kevin — webbutveckling i Ystad</p>
-          <p class="text-sm footer-muted mt-1">Hemsidor för småföretag i Skåne.</p>
+          <Image src={logo} alt="Kevin Lundstedt" width={434} height={200} class="h-16 w-auto" />
+          <p class="text-sm footer-muted mt-4">Handgjorda hemsidor för småföretag i Skåne.</p>
         </div>
-        <div class="text-sm">
-          <p><a href="mailto:lundstedtkevin@gmail.com" class="underline underline-offset-4">lundstedtkevin@gmail.com</a></p>
-          <p class="footer-muted mt-1">© {year}</p>
+        <div class="text-sm sm:text-right">
+          <p><a href="mailto:lundstedtkevin@gmail.com" class="text-ink hover:text-raps transition-colors underline underline-offset-4">lundstedtkevin@gmail.com</a></p>
+          <p class="footer-muted mt-2">© {year} · Ystad</p>
         </div>
       </div>
     </footer>
 
     <script is:inline>
-      // Scroll-edge: tona in headerns skugga/linje först när sidan scrollats (Apple §12).
+      // Scroll-edge: tona in headerns skugga/linje först när sidan scrollats.
       (() => {
         const header = document.querySelector(".site-header");
         if (!header) return;
         const sync = () => header.classList.toggle("scrolled", window.scrollY > 4);
         sync();
         window.addEventListener("scroll", sync, { passive: true });
+      })();
+    </script>
+
+    <script is:inline>
+      // Startsidan: dölj header-loggan medan den stora hero-loggan syns,
+      // tona in den när hero-loggan scrollats förbi (undviker dubbel logga).
+      (() => {
+        const header = document.querySelector(".site-header");
+        const heroLogo = document.querySelector(".hero-logo");
+        if (!header || !heroLogo || !("IntersectionObserver" in window)) return;
+        header.classList.add("hide-brand");
+        const io = new IntersectionObserver(
+          ([e]) => header.classList.toggle("hide-brand", e.isIntersecting),
+          { rootMargin: "-70px 0px 0px 0px", threshold: 0 }
+        );
+        io.observe(heroLogo);
       })();
     </script>
 
@@ -142,26 +143,6 @@ const year = new Date().getFullYear();
         els.forEach((el) => io.observe(el));
         // Säkerhetsnät: inget innehåll får fastna osynligt om IO aldrig triggar.
         setTimeout(() => els.forEach((el) => el.classList.add("revealed")), 2500);
-      })();
-    </script>
-
-    <script is:inline>
-      (() => {
-        const btn = document.getElementById("tema-vaxel");
-        if (!btn) return;
-        const root = document.documentElement;
-        const sync = () => {
-          const dark = root.dataset.theme === "dark";
-          btn.setAttribute("aria-pressed", String(dark));
-          btn.setAttribute("aria-label", dark ? "Byt till ljust läge" : "Byt till mörkt läge");
-        };
-        sync();
-        btn.addEventListener("click", () => {
-          const dark = root.dataset.theme !== "dark";
-          root.dataset.theme = dark ? "dark" : "light";
-          try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
-          sync();
-        });
       })();
     </script>
   </body>
