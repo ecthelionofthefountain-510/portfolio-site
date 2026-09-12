@@ -49,7 +49,7 @@ const year = new Date().getFullYear();
     <a href="#innehall" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:bg-raps focus:text-on-raps focus:px-4 focus:py-2">Hoppa till innehåll</a>
 
     <header class="site-header">
-      <div class="mx-auto max-w-6xl px-5 py-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+      <div class="mx-auto max-w-6xl px-5 py-6 flex items-center justify-between gap-x-8">
         <a href="/" class="inline-flex items-center" aria-label="Kevin Lundstedt — till startsidan">
           <Image
             src={logo}
@@ -59,8 +59,9 @@ const year = new Date().getFullYear();
             class="h-16 sm:h-20 lg:h-24 w-auto"
           />
         </a>
-        <nav aria-label="Huvudmeny">
-          <ul class="flex flex-wrap items-center gap-x-8 gap-y-1 font-display text-[1.05rem]">
+
+        <nav class="hidden md:block" aria-label="Huvudmeny">
+          <ul class="flex items-center gap-x-8 font-display text-[1.05rem]">
             {nav.map((item) => (
               <li>
                 <a href={item.href} aria-current={path === item.href ? "page" : undefined}
@@ -73,8 +74,40 @@ const year = new Date().getFullYear();
             ))}
           </ul>
         </nav>
+
+        <button id="meny-knapp" type="button"
+                class="md:hidden -mr-2 p-2 text-ink hover:text-raps transition-colors"
+                aria-label="Öppna meny" aria-expanded="false" aria-controls="mobil-meny">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
       </div>
     </header>
+
+    <!-- Mobilmeny (helskärm) -->
+    <div id="mobil-meny" class="mobil-meny" aria-hidden="true">
+      <div class="mx-auto max-w-6xl w-full px-5 py-6 flex items-center justify-end">
+        <button id="meny-stang" type="button"
+                class="-mr-2 p-2 text-ink hover:text-raps transition-colors" aria-label="Stäng meny">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+      <nav class="flex-1 flex items-center justify-center" aria-label="Mobilmeny">
+        <ul class="flex flex-col items-center gap-8 font-display text-3xl">
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={path === item.href ? "page" : undefined}
+                 class={path === item.href ? "text-raps" : "text-ink hover:text-raps transition-colors"}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
 
     <main id="innehall" class="flex-1">
       <slot />
@@ -92,6 +125,34 @@ const year = new Date().getFullYear();
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      // Mobilmeny: öppna/stäng helskärmsmenyn.
+      (() => {
+        const btn = document.getElementById("meny-knapp");
+        const menu = document.getElementById("mobil-meny");
+        const close = document.getElementById("meny-stang");
+        if (!btn || !menu) return;
+        const open = () => {
+          menu.classList.add("open");
+          menu.setAttribute("aria-hidden", "false");
+          btn.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        };
+        const shut = () => {
+          menu.classList.remove("open");
+          menu.setAttribute("aria-hidden", "true");
+          btn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        };
+        btn.addEventListener("click", open);
+        if (close) close.addEventListener("click", shut);
+        menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", shut));
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && menu.classList.contains("open")) shut();
+        });
+      })();
+    </script>
 
     <script is:inline>
       // Scroll-reveal: tona in [data-reveal]-element när de når vyn.

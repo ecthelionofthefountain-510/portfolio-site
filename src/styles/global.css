@@ -59,6 +59,28 @@ h1, h2, h3, .font-display {
   background: transparent;
 }
 
+/* ── Mobilmeny: helskärms-overlay, endast < md ───────────────────────────── */
+.mobil-meny {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--color-chalk) 97%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobil-meny.open {
+  opacity: 1;
+  visibility: visible;
+}
+@media (min-width: 768px) {
+  .mobil-meny { display: none; }
+}
+
 /* ── Footer: fast mörkt band, en aning djupare än sidan ──────────────────── */
 .site-footer {
   background-color: #0A0908;
