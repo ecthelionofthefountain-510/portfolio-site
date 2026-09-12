@@ -49,14 +49,14 @@ const year = new Date().getFullYear();
     <a href="#innehall" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:bg-raps focus:text-on-raps focus:px-4 focus:py-2">Hoppa till innehåll</a>
 
     <header class="site-header">
-      <div class="mx-auto max-w-6xl px-5 py-4 flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-        <a href="/" class="header-brand inline-flex items-center" aria-label="Kevin Lundstedt — till startsidan">
+      <div class="mx-auto max-w-6xl px-5 py-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+        <a href="/" class="inline-flex items-center" aria-label="Kevin Lundstedt — till startsidan">
           <Image
             src={logo}
             alt="Kevin Lundstedt"
-            width={434}
-            height={200}
-            class="h-12 sm:h-14 w-auto"
+            width={520}
+            height={240}
+            class="h-16 sm:h-20 lg:h-24 w-auto"
           />
         </a>
         <nav aria-label="Huvudmeny">
@@ -92,33 +92,6 @@ const year = new Date().getFullYear();
         </div>
       </div>
     </footer>
-
-    <script is:inline>
-      // Scroll-edge: tona in headerns skugga/linje först när sidan scrollats.
-      (() => {
-        const header = document.querySelector(".site-header");
-        if (!header) return;
-        const sync = () => header.classList.toggle("scrolled", window.scrollY > 4);
-        sync();
-        window.addEventListener("scroll", sync, { passive: true });
-      })();
-    </script>
-
-    <script is:inline>
-      // Startsidan: dölj header-loggan medan den stora hero-loggan syns,
-      // tona in den när hero-loggan scrollats förbi (undviker dubbel logga).
-      (() => {
-        const header = document.querySelector(".site-header");
-        const heroLogo = document.querySelector(".hero-logo");
-        if (!header || !heroLogo || !("IntersectionObserver" in window)) return;
-        header.classList.add("hide-brand");
-        const io = new IntersectionObserver(
-          ([e]) => header.classList.toggle("hide-brand", e.isIntersecting),
-          { rootMargin: "-70px 0px 0px 0px", threshold: 0 }
-        );
-        io.observe(heroLogo);
-      })();
-    </script>
 
     <script is:inline>
       // Scroll-reveal: tona in [data-reveal]-element när de når vyn.

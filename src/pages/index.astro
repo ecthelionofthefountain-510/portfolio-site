@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import logo from "../assets/logo-lundstedt.png";
 
 const tjanster = [
   {
@@ -46,24 +44,16 @@ const steg = [
 >
   <!-- Hero -->
   <div class="hero-ambient">
-    <section class="mx-auto max-w-6xl px-5 pt-5 pb-24 lg:pt-6 lg:pb-28 grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:items-start">
+    <section class="mx-auto max-w-6xl px-5 pt-12 pb-24 lg:pt-20 lg:pb-28 grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:items-center">
       <div>
-        <Image
-          data-reveal
-          src={logo}
-          alt="Kevin Lundstedt"
-          width={640}
-          height={295}
-          class="hero-logo h-40 sm:h-48 lg:h-56 w-auto -ml-1"
-        />
-        <p data-reveal style="--reveal-delay: 0.1s" class="mt-7 text-raps uppercase tracking-[0.25em] text-xs font-semibold">
+        <p data-reveal class="text-raps uppercase tracking-[0.25em] text-xs font-semibold">
           Webbutveckling i Ystad
         </p>
-        <h1 data-reveal style="--reveal-delay: 0.18s" class="mt-5 text-5xl sm:text-6xl lg:text-7xl leading-[1.08]">
+        <h1 data-reveal style="--reveal-delay: 0.08s" class="mt-6 text-5xl sm:text-6xl lg:text-7xl leading-[1.08]">
           Handgjorda hemsidor med personlighet.
         </h1>
-        <hr data-reveal style="--reveal-delay: 0.26s" class="gold-rule mt-8" />
-        <p data-reveal style="--reveal-delay: 0.32s" class="mt-8 max-w-md text-lg leading-[1.75] text-ink-soft">
+        <hr data-reveal style="--reveal-delay: 0.16s" class="gold-rule mt-8" />
+        <p data-reveal style="--reveal-delay: 0.22s" class="mt-8 max-w-md text-lg leading-[1.75] text-ink-soft">
           Många småföretag har bara en Facebook-sida. Jag bygger riktiga hemsidor
           som syns på Google, funkar i mobilen och gör att folk kan hitta, ringa
           och boka dig — till ett fast pris du får veta i förväg.
