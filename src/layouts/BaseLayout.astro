@@ -60,13 +60,13 @@ const year = new Date().getFullYear();
           />
         </a>
         <nav aria-label="Huvudmeny">
-          <ul class="flex flex-wrap items-center gap-x-7 gap-y-1 text-[0.95rem]">
+          <ul class="flex flex-wrap items-center gap-x-8 gap-y-1 font-display text-[1.05rem]">
             {nav.map((item) => (
               <li>
                 <a href={item.href} aria-current={path === item.href ? "page" : undefined}
                    class={path === item.href
                      ? "text-raps"
-                     : "text-ink-soft hover:text-raps transition-colors"}>
+                     : "text-ink hover:text-raps transition-colors"}>
                   {item.label}
                 </a>
               </li>
